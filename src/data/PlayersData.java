@@ -95,7 +95,7 @@ public class PlayersData {
 	public void saveData() {
 		PrintWriter pw;
 		try {
-			pw = new PrintWriter(new FileWriter("player_stats.txt"));
+			pw = new PrintWriter(new FileWriter("player_stats.txt",true));
 			players.forEach(e -> pw.println(e));
 			pw.close();
 		} catch (IOException e) {
@@ -105,7 +105,7 @@ public class PlayersData {
 	public void saveMap() {
 		PrintWriter pw;
 		try {
-			pw = new PrintWriter(new FileWriter("accounts.txt"));
+			pw = new PrintWriter(new FileWriter("accounts.txt",true));
 			for(Map.Entry<String, String> e: authentication.entrySet()) {
 			pw.println(e.getKey()+";"+e.getValue());
 		}
