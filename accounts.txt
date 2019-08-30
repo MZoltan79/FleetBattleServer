@@ -1,1 +1,2 @@
-Player1;12345
+player1;password
+player2;password

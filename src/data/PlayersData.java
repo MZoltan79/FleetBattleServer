@@ -18,10 +18,16 @@ public class PlayersData {
 	
 	private HashMap<String, String> authentication;
 	ArrayList<Player> players;
+	private boolean beginner;
+	
 	
 	private PlayersData() {
 		authentication = new HashMap<>();
 		players = new ArrayList<>();
+		beginner = true;
+		loadData();
+		loadMap();
+
 	}
 	
 	public static PlayersData getInstance() {
@@ -35,30 +41,12 @@ public class PlayersData {
 		return authentication;
 	}
 
-	public void setAuthentication(HashMap<String, String> authentication) {
-		this.authentication = authentication;
-	}
-
-	public ArrayList<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
-	}
 	
-	public void addPlayer(Player player) {
-		players.add(player);
-	}
-	
-	public void addAccount(String nickName, String passwrd) {
-		authentication.put(nickName, passwrd);
-	}
 	
 	public void loadData() {
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("player_stats.txt"));
+			br = new BufferedReader(new FileReader("/home/moricz/workspaces/own-workspace/FleetBattleServer/player_stats.txt"));
 			while(br.ready()) {
 				String tmp[] = br.readLine().split(";");
 				Player player = new Player();
@@ -78,7 +66,7 @@ public class PlayersData {
 	public void loadMap() {
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("accounts.txt"));
+			br = new BufferedReader(new FileReader("/home/moricz/workspaces/own-workspace/FleetBattleServer/accounts.txt"));
 			while(br.ready()) {
 				String line = br.readLine();
 				String[] tmp = line.split(";");
@@ -95,7 +83,7 @@ public class PlayersData {
 	public void saveData() {
 		PrintWriter pw;
 		try {
-			pw = new PrintWriter(new FileWriter("player_stats.txt",true));
+			pw = new PrintWriter(new FileWriter("/home/moricz/workspaces/own-workspace/FleetBattleServer/player_stats.txt"));
 			players.forEach(e -> pw.println(e));
 			pw.close();
 		} catch (IOException e) {
@@ -105,7 +93,7 @@ public class PlayersData {
 	public void saveMap() {
 		PrintWriter pw;
 		try {
-			pw = new PrintWriter(new FileWriter("accounts.txt",true));
+			pw = new PrintWriter(new FileWriter("/home/moricz/workspaces/own-workspace/FleetBattleServer/accounts.txt"));
 			for(Map.Entry<String, String> e: authentication.entrySet()) {
 			pw.println(e.getKey()+";"+e.getValue());
 		}
@@ -113,6 +101,34 @@ public class PlayersData {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setAuthentication(HashMap<String, String> authentication) {
+		this.authentication = authentication;
+	}
+	
+	public void setBeginner() {
+		beginner = !beginner;
+	}
+	
+	public boolean isBeginner() {
+		return beginner;
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
+		this.players = players;
+	}
+	
+	public void addPlayer(Player player) {
+		players.add(player);
+	}
+	
+	public void addAccount(String nickName, String passwrd) {
+		authentication.put(nickName, passwrd);
 	}
 
 }
