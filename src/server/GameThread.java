@@ -68,7 +68,7 @@ public class GameThread implements Runnable {
 				} else if(msg.equals("opponentData")) {
 					
 				} else {
-					System.out.println(msg);
+//					System.out.println(msg);
 					send.println(msg);
 				}
 			}

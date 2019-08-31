@@ -1,2 +1,3 @@
 player1;0;0
 player2;0;0
+Zoli;2;2

@@ -17,14 +17,12 @@ public class PlayersData {
 	private static PlayersData instance;
 	
 	private HashMap<String, String> authentication;
-	ArrayList<Player> players;
-	private boolean beginner;
+	private ArrayList<Player> players;
 	
 	
 	private PlayersData() {
 		authentication = new HashMap<>();
 		players = new ArrayList<>();
-		beginner = true;
 		loadData();
 		loadMap();
 
@@ -107,14 +105,6 @@ public class PlayersData {
 		this.authentication = authentication;
 	}
 	
-	public void setBeginner() {
-		beginner = !beginner;
-	}
-	
-	public boolean isBeginner() {
-		return beginner;
-	}
-
 	public ArrayList<Player> getPlayers() {
 		return players;
 	}
