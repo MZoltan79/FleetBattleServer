@@ -32,7 +32,6 @@ public class GameThread implements Runnable {
 			PrintWriter own = new PrintWriter(receiver.getOutputStream(), true);
 			BufferedReader br = new BufferedReader(
 					new InputStreamReader(receiver.getInputStream()));
-			
 			while (true) {
 				String msg = br.readLine();
 				if(msg == null) {
@@ -64,11 +63,22 @@ public class GameThread implements Runnable {
 						own.println("Your account is ready to use, please log in!");
 					}
 				} else if(msg.equals("gameover")) {
-					
-				} else if(msg.equals("opponentData")) {
-					
+					String str = br.readLine();
+					String[] tmp = str.split(";");
+					for(Player p: pd.getPlayers()) {
+						if(p.getNickName().equals(tmp[0])) {
+							p.setGamesPlayed(Integer.parseInt(tmp[1]));
+							p.setGamesWon(Integer.parseInt(tmp[2]));
+						}
+						if(p.getNickName().equals(tmp[3])) {
+							p.setGamesPlayed(Integer.parseInt(tmp[4]));
+							p.setGamesWon(Integer.parseInt(tmp[5]));
+						}
+					}
+					pd.saveData();
+			
 				} else {
-//					System.out.println(msg);
+					System.out.println(msg);
 					send.println(msg);
 				}
 			}
