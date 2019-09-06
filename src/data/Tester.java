@@ -2,7 +2,6 @@ package data;
 
 import java.util.Map;
 
-import fleetbattle.model.Player;
 
 public class Tester {
 
@@ -30,8 +29,20 @@ public class Tester {
 				});
 			}
 		}
+		for(Map.Entry<String, String> e: pd.getAuthentication().entrySet()) {
+			if(e.getKey().equals("Feri")) {
+				System.out.println("felhasználó van");
+			} else {
+				System.out.println("felhasználó nincs");
+			}
+		}
 		
-		System.out.println(pd.getAuthentication().get("player1"));
+		if(pd.getAuthentication().get("Feri").equals("valami")) {
+			System.out.println("ok");
+		} else {
+			System.out.println("nem ok");
+		}
+		System.out.println(pd.getAuthentication().get("Zoli"));
 		
 		
 	}

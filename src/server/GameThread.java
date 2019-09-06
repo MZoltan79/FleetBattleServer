@@ -7,18 +7,21 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Map;
 
+import data.Player;
 import data.PlayersData;
-import fleetbattle.model.Player;
+
 
 public class GameThread implements Runnable {
 
 	Socket sender;
 	Socket receiver;
 	PlayersData pd;
+	int id;
 
-	public GameThread(Socket sender, Socket receiver) {
+	public GameThread(Socket sender, Socket receiver, int id) {
 		this.sender = sender;
 		this.receiver = receiver;
+		this.id = id;
 		pd = PlayersData.getInstance();
 	}
 	
@@ -32,6 +35,7 @@ public class GameThread implements Runnable {
 			PrintWriter own = new PrintWriter(receiver.getOutputStream(), true);
 			BufferedReader br = new BufferedReader(
 					new InputStreamReader(receiver.getInputStream()));
+			send.println("client" + id);
 			while (true) {
 				String msg = br.readLine();
 				if(msg == null) {
@@ -41,6 +45,8 @@ public class GameThread implements Runnable {
 				if(msg.equals("login")) {
 					String nickName = br.readLine();
 					String password = br.readLine();
+					if(checkNickName(nickName)) {
+						
 					if(checkLoginData(nickName, password)) {
 						own.println("login successed");
 						for(Player p: pd.getPlayers()) {
@@ -49,6 +55,7 @@ public class GameThread implements Runnable {
 								break;
 							}
 						}
+					}
 					}
 				} else if(msg.equals("newplayer")) {
 					String nickName = br.readLine();
@@ -60,7 +67,7 @@ public class GameThread implements Runnable {
 						pd.getPlayers().add(new Player(nickName,0,0));
 						pd.saveData();
 						pd.saveMap();
-						own.println("Your account is ready to use, please log in!");
+						own.println("new player successed");
 					}
 				} else if(msg.equals("gameover")) {
 					String str = br.readLine();
@@ -78,7 +85,6 @@ public class GameThread implements Runnable {
 					pd.saveData();
 			
 				} else {
-					System.out.println(msg);
 					send.println(msg);
 				}
 			}

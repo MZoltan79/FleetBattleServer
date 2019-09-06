@@ -26,11 +26,11 @@ public class Server {
 			clientSocket2 = ss.accept();
 			System.out.println("client_2 connected: " + clientSocket2.isConnected());
 			
-			Thread th = new Thread(new GameThread(clientSocket1, clientSocket2));
+			Thread th = new Thread(new GameThread(clientSocket1, clientSocket2, 1));
 			th.start();
 			
 				
-			Thread th2 = new Thread(new GameThread(clientSocket2, clientSocket1));
+			Thread th2 = new Thread(new GameThread(clientSocket2, clientSocket1, 2));
 			th2.start();
 //			}
 		} catch (IOException e) {

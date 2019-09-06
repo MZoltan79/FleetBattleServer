@@ -1,0 +1,2 @@
+TestPlayer;password
+Zoli;jelszo

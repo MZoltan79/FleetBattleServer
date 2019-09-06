@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import fleetbattle.model.Player;
 
 public class PlayersData {
 	
@@ -46,7 +45,7 @@ public class PlayersData {
 	public void loadData() {
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("/home/moricz/workspaces/own-workspace/FleetBattleServer/player_stats.txt"));
+			br = new BufferedReader(new FileReader("player_stats.txt"));
 			while(br.ready()) {
 				String tmp[] = br.readLine().split(";");
 				Player player = new Player();
@@ -66,7 +65,7 @@ public class PlayersData {
 	public void loadMap() {
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("/home/moricz/workspaces/own-workspace/FleetBattleServer/accounts.txt"));
+			br = new BufferedReader(new FileReader("accounts.txt"));
 			while(br.ready()) {
 				String line = br.readLine();
 				String[] tmp = line.split(";");
@@ -83,7 +82,7 @@ public class PlayersData {
 	public void saveData() {
 		PrintWriter pw;
 		try {
-			pw = new PrintWriter(new FileWriter("/home/moricz/workspaces/own-workspace/FleetBattleServer/player_stats.txt"));
+			pw = new PrintWriter(new FileWriter("player_stats.txt"));
 			players.forEach(e -> pw.println(e));
 			pw.close();
 		} catch (IOException e) {
@@ -93,7 +92,7 @@ public class PlayersData {
 	public void saveMap() {
 		PrintWriter pw;
 		try {
-			pw = new PrintWriter(new FileWriter("/home/moricz/workspaces/own-workspace/FleetBattleServer/accounts.txt"));
+			pw = new PrintWriter(new FileWriter("accounts.txt"));
 			for(Map.Entry<String, String> e: authentication.entrySet()) {
 			pw.println(e.getKey()+";"+e.getValue());
 		}
