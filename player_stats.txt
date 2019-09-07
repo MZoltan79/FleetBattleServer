@@ -1,2 +1,2 @@
-TestPlayer;6;1
-Zoli;6;5
+TestPlayer1;0;0
+TestPlayer2;0;0

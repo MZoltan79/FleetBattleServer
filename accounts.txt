@@ -1,2 +1,2 @@
-TestPlayer;password
-Zoli;jelszo
+TestPlayer1;password
+TestPlayer2;password
